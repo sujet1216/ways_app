@@ -37,7 +37,8 @@ class _LoginScreenState extends State<LoginScreen> {
         return;
       }
 
-      Navigator.pushReplacementNamed(context, '/feed');
+      // Navigator.pushReplacementNamed(context, '/feed');
+      print('success');
     } on FirebaseAuthException catch (e) {
       setState(() {
         _error = e.message;
@@ -87,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () {
                   Navigator.pushNamed(context, '/signup');
                 },
-                child: const Text('Don’t have an account? Sign up'),
+                child: const Text('Don\'t have an account? Sign up'),
               ),
             ],
           ),

@@ -9,7 +9,7 @@ class AppRoutes {
       case '/login':
         return MaterialPageRoute(builder: (_) => LoginScreen());
       case '/signup':
-        return MaterialPageRoute(fullscreenDialog: true, builder: (_) => SignUpScreen());
+        return MaterialPageRoute(builder: (_) => SignUpScreen());
       default:
         return null;
       // case '/feed':
