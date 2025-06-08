@@ -24,15 +24,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
     });
 
     try {
-      final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text,
-      );
+      final userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+            email: _emailController.text.trim(),
+            password: _passwordController.text,
+          );
 
       await userCredential.user!.sendEmailVerification();
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Verification email sent. Please check your inbox.')),
+        const SnackBar(
+          content: Text('Verification email sent. Please check your inbox.'),
+        ),
       );
 
       Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
@@ -62,24 +65,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
           key: _formKey,
           child: Column(
             children: [
-              if (_error != null) Text(_error!, style: const TextStyle(color: Colors.red)),
+              if (_error != null)
+                Text(_error!, style: const TextStyle(color: Colors.red)),
               TextFormField(
                 controller: _emailController,
                 decoration: const InputDecoration(labelText: 'Email'),
-                validator: (value) => value != null && value.contains('@') ? null : 'Invalid email',
+                keyboardType: TextInputType.emailAddress,
+                validator:
+                    (value) =>
+                        value != null && value.contains('@')
+                            ? null
+                            : 'Invalid email',
               ),
               const SizedBox(height: 12),
               TextFormField(
                 controller: _passwordController,
                 decoration: const InputDecoration(labelText: 'Password'),
                 obscureText: true,
+                keyboardType: TextInputType.visiblePassword,
                 validator:
-                    (value) => value != null && value.length >= 6 ? null : 'Min 6 characters',
+                    (value) =>
+                        value != null && value.length >= 6
+                            ? null
+                            : 'Min 6 characters',
               ),
               const SizedBox(height: 24),
               _loading
                   ? const CircularProgressIndicator()
-                  : ElevatedButton(onPressed: _signup, child: const Text('Sign Up')),
+                  : ElevatedButton(
+                    onPressed: _signup,
+                    child: const Text('Sign Up'),
+                  ),
               TextButton(
                 onPressed: () {
                   Navigator.pushReplacementNamed(context, '/login');
